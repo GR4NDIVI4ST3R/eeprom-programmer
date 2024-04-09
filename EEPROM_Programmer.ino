@@ -158,12 +158,22 @@ bool writeEEPROM() {
   Serial.println("\r\nWriting Program " + String(sel) + " to EEPROM...");
   long int t = millis();
   if (sel == 1) {
-    /* Common Cathode 7-Segment Display Binary to Hex Decoder */
-    byte program[] = {0x7E, 0x30, 0x6D, 0x79, 0x33, 0x5B, 0x5F, 0x70, 0x7F, 0x7B, 0x77, 0x1F, 0x4E, 0x3D, 0x4F, 0x47};
+    /* 7-Segment Display Binary to Hex Decoder (Common-Cathode, GFEDCBA) */
+    byte program[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71};
     for (int address = 0; address < sizeof(program); address++) writeData(address, program[address]);
   }
   else if (sel == 2) {
-    /* Common Anode 7-Segment Display Binary to Hex Decoder */
+    /* 7-Segment Display Binary to Hex Decoder (Common-Anode, GFEDCBA) */
+    byte program[] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x80, 0x90, 0x88, 0x83, 0xC6, 0xA1, 0x86, 0x8E};
+    for (int address = 0; address < sizeof(program); address++) writeData(address, program[address]);
+  }
+  else if (sel == 3) {
+    /* 7-Segment Display Binary to Hex Decoder (Common-Cathode, ABCDEFG) */
+    byte program[] = {0x7E, 0x30, 0x6D, 0x79, 0x33, 0x5B, 0x5F, 0x70, 0x7F, 0x7B, 0x77, 0x1F, 0x4E, 0x3D, 0x4F, 0x47};
+    for (int address = 0; address < sizeof(program); address++) writeData(address, program[address]);
+  }
+  else if (sel == 4) {
+    /* 7-Segment Display Binary to Hex Decoder (Common-Anode, ABCDEFG) */
     byte program[] = {0x81, 0xCF, 0x92, 0x86, 0xCC, 0xA4, 0xA0, 0x8F, 0x80, 0x84, 0x88, 0xE0, 0xB1, 0xC2, 0xB0, 0xB8};
     for (int address = 0; address < sizeof(program); address++) writeData(address, program[address]);
   }
